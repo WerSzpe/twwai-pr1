@@ -62,7 +62,7 @@ export function LineChart() {
                 ],
             };
 
-            const res = await fetch("https://twwai-33205.heroku.com/api/params");
+            const res = await fetch("https://twwai-33205.herokuapp.com/api/params");
             const dataRes = await res.json();
 
             data.datasets[0].data = dataRes.map(item => {
