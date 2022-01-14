@@ -26,11 +26,22 @@ async function query() {
 }
 
 async function get(id) {
-    // ParamModel.findOne({_id: id});
+    const result = await ParamModel.findById(id);
+    {
+        if(result) {
+            return mongoConverter(result);
+        }
+    }
 }
 
 async function getLast() {
     // ParamModel.findOne().sort({'_id':-1}).limit(1);
+    const result = await ParamModel.findOne().sort({'_id':-1}).limit(1);
+    {
+        if(result) {
+            return mongoConverter(result);
+        }
+    }
 }
 
 export default {

@@ -14,8 +14,23 @@ const paramEndpoint = (router) => {
 
     // dodanie ścieżki pobierającej ostatni wpis | GET /api/params/last
     // router.get ...
-
+    router.get('/api/params/last', async(req, res, next) => {
+        try{
+            let result = await business.getParamManager().getLast();
+            res.status(200).send(result);
+        } catch (error) {
+            applicationException.errorHandler(error, res);
+        }
+    })
     // dodanie ścieżki pobierającej ostatni wpis | GET /api/params/:id
     // router.get ...
+    router.get('/api/params/:id', async(req, res, next) => {
+        try{
+            let result = await business.getParamManager().get(req.params.id);
+            res.status(200).send(result);
+        } catch (error) {
+            applicationException.errorHandler(error, res);
+        }
+    })
 };
 export default paramEndpoint;

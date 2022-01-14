@@ -11,10 +11,18 @@ function create() {
 
     async function get(id) {
         // funkcja pobierająca pojedynczy wpis po ID
+        let result = paramDAO.get(id);
+        if(result) {
+            return result;
+        }
     }
 
     async function getLast() {
         // funkcja pobierająca ostatni wpis
+        let result = paramDAO.getLast();
+        if(result) {
+            return result;
+        }
     }
 
     return {
