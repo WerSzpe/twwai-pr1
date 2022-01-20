@@ -44,10 +44,20 @@ async function getLast() {
     }
 }
 
+async function getFromDate(content) {
+    const result = await ParamModel.find({date: {$regex: content}});
+    {
+        if(result) {
+            return mongoConverter(result);
+        }
+    }
+}
+
 export default {
     query: query,
     get: get,
     getLast,
+    getFromDate,
 
     model: ParamModel
 };

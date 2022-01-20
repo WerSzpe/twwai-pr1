@@ -1,5 +1,4 @@
 import React from 'react';
-import { useEffect, useState } from "react";
 
 import {
    Chart as ChartJS,
@@ -32,62 +31,11 @@ export const options = {
    },
 };
 
-export function LineChart() {
+export function LineChart(props) {
 
-    const [chartData, chartDataSet] = useState(null);
-
-    useEffect( () => {
-        const fetchAir = async () => {
-            let data = {
-                labels: [],
-                datasets: [
-                    {
-                        label: 'Temp',
-                        data: [],
-                        borderColor: 'rgb(255, 99, 132)',
-                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                    },
-                    {
-                        label: 'Hum',
-                        data: [],
-                        borderColor: 'rgb(31,52,217)',
-                        backgroundColor: 'rgba(31,52,217, 0.5)',
-                    },
-                    {
-                        label: 'Press',
-                        data: [],
-                        borderColor: 'rgb(95,220,61)',
-                        backgroundColor: 'rgba(95,220,61, 0.5)',
-                    }
-                ],
-            };
-
-            const res = await fetch("https://twwai-33205.herokuapp.com/api/params");
-            const dataRes = await res.json();
-
-            data.datasets[0].data = dataRes.map(item => {
-                return item.temp;
-            })
-
-            data.datasets[1].data = dataRes.map(item => {
-                return item.humidity;
-            })
-
-            data.datasets[2].data = dataRes.map(item => {
-                return item.pressure;
-            })
-
-            data.labels = dataRes.map (item => {
-                return item.date;
-            })
-            chartDataSet(data);
-        }
-        fetchAir();
-    },[]);
-
-    if(!chartData){
+    if(!props.data){
         return null;
     }
 
-    return <Line options={options} data={chartData}/>
+    return <Line options={options} data={props.data}/>
 }

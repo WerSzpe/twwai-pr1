@@ -32,5 +32,14 @@ const paramEndpoint = (router) => {
             applicationException.errorHandler(error, res);
         }
     })
+    //dodanie ścieżki do zajęć 12
+    router.get('/api/params/search/:date', async(req,res,next) => {
+        try{
+            let result = await business.getParamManager().getFromDate(req.params.date);
+            res.status(200).send(result);
+        } catch (error) {
+            applicationException.errorHandler(error,res);
+        }
+    })
 };
 export default paramEndpoint;
